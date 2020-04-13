@@ -1,6 +1,18 @@
 import React from 'react'
 
 class LogIn extends React.Component {
+    
+    state = {
+        signIn: false
+    }
+
+    handleClick = e => {
+        this.setState({
+            
+        })
+
+    }
+    
     render() {
         return (
             <div>
