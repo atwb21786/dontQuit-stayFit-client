@@ -1,17 +1,7 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 class LogIn extends React.Component {
-    
-    state = {
-        signIn: false
-    }
-
-    handleClick = e => {
-        this.setState({
-            
-        })
-
-    }
     
     render() {
         return (
@@ -20,6 +10,7 @@ class LogIn extends React.Component {
                     <h2>DON'T QUIT STAY FIT!</h2>
                 </header>
                 <main>
+                    <form>
                     <fieldset>
                         <label htmlFor="username">USERNAME:</label>
                         <input type="text" id="username" name="username" required/>
@@ -27,8 +18,11 @@ class LogIn extends React.Component {
                         <label htmlFor="pwd">PASSWORD:</label>
                         <input type="password" id="pwd" name="pwd" required/>
                         <br/>
-                        <button type="submit">SUBMIT</button>
+                        {/* <button type="submit">SUBMIT</button> */}
+                        <Link to='/homepage'>SUBMIT</Link>
                     </fieldset>
+                    </form>
+                    
                 </main>
             </div>
 

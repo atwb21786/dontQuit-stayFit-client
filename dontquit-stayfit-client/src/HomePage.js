@@ -6,7 +6,7 @@ class HomePage extends React.Component {
         return(
             <div>
                 <nav>
-                    <Link to='' >HOME</Link>
+                    <Link to='/homepage'>HOME</Link>
                     <Link to='/' >LOGOUT</Link>
                 </nav>
                 <header>
