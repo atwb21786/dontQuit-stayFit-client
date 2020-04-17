@@ -1,25 +1,32 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import config from '../config'
 
 class Goals extends React.Component {
     state = {
-        goals: [
-            {
-                content: 'this is my goal',
-                date_created: new Date()
-            }
-        ]
+        goals: []
     }
-
+    
     addGoal = e => {
         e.preventDefault()
         const goal = e.target.content.value;
+        fetch(`${config.API_ENDPOINT}/goals`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                content: goal,
+                date_created: new Date()
+            }) 
+        })
         this.setState({
             goals: [...this.state.goals, {
                 content: goal,
                 date_created: new Date()
             }]
         })
+        
     }
 
     deleteGoal = index => {
@@ -28,6 +35,8 @@ class Goals extends React.Component {
         })
 
     }
+
+
 
     render() {
         return(

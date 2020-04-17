@@ -1,31 +1,29 @@
 import React from 'react'
-import TokenService from './Service/token-service'
-
 import { Link } from 'react-router-dom'
 
-class LogIn extends React.Component {
-    
-    static defaultProps = {
-        onLoginSuccess: () => {}
+
+class Register extends React.Component {
+
+    loginSubmit = e => {
+        e.preventDefault();
+        fetch('http://localhost:8000/users', {
+            method: "POST",
+            headers: {
+                "Content-type": "application/json",
+
+            }, 
+            body: JSON.stringify({
+                
+                    user_name: e.target.user_name.value,
+                    password: e.target.password.value,
+                
+            })
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data)
+            })
     }
-
-    state = { error: null }
-    
-    handleSubmitBasicAuth = ev => {
-        ev.preventDefault()
-        const { user_name, password } = ev.target
-    
-        TokenService.saveAuthToken(
-          TokenService.makeBasicAuthToken(user_name.value, password.value)
-        )
-    
-        user_name.value = ''
-        password.value = ''
-        this.props.onLoginSuccess()
-      }
-
-    
-
 
     render() {
         return (
@@ -52,6 +50,10 @@ class LogIn extends React.Component {
 
         )
     }
+
+
 }
 
-export default LogIn
+export default Register
+
+
