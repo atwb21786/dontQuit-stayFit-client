@@ -1,25 +1,54 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import config from '../config'
+import TokenService from '../Service/token-service'
 
 class Fitness extends React.Component {
     
     state = {
-        fitness: [
-            {
-                content: 'workout every day',
-                date_created: new Date()
-            }
-        ]
+        fitness: []
     }
 
-    addWorkout = e => {
+    componentDidMount = () => {
+        fetch(`${config.API_ENDPOINT}/fitness`)
+        .then(fitnessLog => {
+            if(!fitnessLog.ok) {
+                return fitnessLog.json().then((e) => Promise.reject(e))
+            }
+            return fitnessLog.json()
+        })
+        .then(fitnessLog => {
+            this.setState({
+                fitness: fitnessLog,
+                date_created: new Date()
+            })
+        })
+    }
+
+    addWorkoutForm = e => {
         e.preventDefault()
         const fit = e.target.content.value;
-        this.setState({
-            fitness: [...this.state.fitness, {
+        fetch(`${config.API_ENDPOINT}/fitness`, {
+            method: 'POST', 
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${TokenService.getAuthToken()}`
+
+            },
+            body: JSON.stringify({
                 content: fit,
                 date_created: new Date()
-            }]
+            })
+        })
+        .then(res => res.json())
+        .then(() => {
+            this.setState({
+                fitness: [...this.state.fitness, {
+                    content: fit,
+                    date_created: new Date()
+                }]
+            })
+            this.props.history.push('/fitness')
         })
     }
 
@@ -42,7 +71,7 @@ class Fitness extends React.Component {
                 </header>
                 <main>
                     <h4>ENTER WORKOUT</h4>
-                        <form onSubmit={this.addWorkout}>
+                        <form onSubmit={this.addWorkoutForm}>
                             <label htmlFor="fitness"></label>
                             <textarea name='content' required></textarea>
                             <br/>

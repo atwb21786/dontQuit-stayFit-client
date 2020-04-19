@@ -22,7 +22,7 @@ class App extends React.Component {
   componentDidMount = () => {
     Promise.all([
       fetch(`${config.API_ENDPOINT}/goals`),
-      fetch(`${config.API_ENDPOINT}/weight`),
+      fetch(`${config.API_ENDPOINT}/weigh_in`),
       fetch(`${config.API_ENDPOINT}/fitness`),
       fetch(`${config.API_ENDPOINT}/feedback`),
     ])
@@ -50,6 +50,8 @@ class App extends React.Component {
         feedback: feedbackResult
       })
     })
+
+    
 
   } 
   

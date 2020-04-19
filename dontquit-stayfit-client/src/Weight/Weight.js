@@ -1,32 +1,60 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import config from '../config'
+import TokenService from '../Service/token-service'
 
 class Weight extends React.Component {
 
     state = {
-        weight: [
-            {
-                data: 164.4,
-                date_created: new Date()
+        weight: []
+    }
+
+    componentDidMount = () => {
+        fetch(`${config.API_ENDPOINT}/weigh_in`)
+        .then(weightLog => {
+            if(!weightLog.ok) {
+                return weightLog.json().then((e) => Promise.reject(e))
             }
-        ]
+            return weightLog.json()
+        })
+        .then(weightLog => {
+            this.setState({
+                weight: weightLog,
+                date_created: new Date()
+            })
+        })
     }
 
     addWeight = e => {
         e.preventDefault();
         const item = e.target.content.value;
-        console.log(item)
-        this.setState({
-            weight: [...this.state.weight, {
-                data: item,
+        fetch(`${config.API_ENDPOINT}/weigh_in`, {
+            method: 'POST', 
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${TokenService.getAuthToken()}`
+
+            },
+            body: JSON.stringify({
+                measurement: item,
                 date_created: new Date()
-            }]
+            })
+        })
+        .then(res => res.json())
+        .then(() => {
+            this.setState({
+                weight: [...this.state.weight, {
+                    measurement: item,
+                    date_created: new Date()
+                }]
+            })
+            this.props.history.push('/weight')
         })
     }
 
     deleteWeight = index => {
         this.setState({
-            goal: this.state.weight.splice(index, 1)
+            wt: this.state.weight.splice(index, 1)
         })
 
     }

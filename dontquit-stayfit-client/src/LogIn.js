@@ -1,28 +1,50 @@
 import React from 'react'
 import TokenService from './Service/token-service'
+import ApiAuthService from './Service/api-auth-service'
 
-import { Link } from 'react-router-dom'
 
 class LogIn extends React.Component {
     
     static defaultProps = {
-        onLoginSuccess: () => {}
+        loginSuccess: () => {}
     }
 
     state = { error: null }
     
-    handleSubmitBasicAuth = ev => {
-        ev.preventDefault()
-        const { user_name, password } = ev.target
+    handleJWTSubmission = (event) => {
+        event.preventDefault();
+        const { user_name, password } = event.target
+        this.setState({ error: null })
+        ApiAuthService.getLogin({
+            user_name: user_name.value,
+            password: password.value,
+        })
+        .then(user => {
+            user_name.value = ''
+            password.value = ''
+            TokenService.saveAuthToken(user.authToken)
+                this.props.loginSuccess()
+                this.props.history.push('/homepage');
+
+        })
+        .catch(res => {
+            this.setState({ error: res.error })
+        })
+
+    }
+
+    // handleSubmitBasicAuth = ev => {
+    //     ev.preventDefault()
+    //     const { user_name, password } = ev.target
     
-        TokenService.saveAuthToken(
-          TokenService.makeBasicAuthToken(user_name.value, password.value)
-        )
+    //     TokenService.saveAuthToken(
+    //       TokenService.makeBasicAuthToken(user_name.value, password.value)
+    //     )
     
-        user_name.value = ''
-        password.value = ''
-        this.props.onLoginSuccess()
-      }
+    //     user_name.value = ''
+    //     password.value = ''
+    //     this.props.onLoginSuccess()
+    //   }
 
     
 
@@ -34,7 +56,7 @@ class LogIn extends React.Component {
                     <h2>DON'T QUIT STAY FIT!</h2>
                 </header>
                 <main>
-                    <form onSubmit={this.loginSubmit}>
+                    <form onSubmit={this.handleJWTSubmission}>
                     <fieldset>
                         <label htmlFor="username">USERNAME:</label>
                         <input type="text" id="username" name="user_name" required/>
@@ -43,7 +65,7 @@ class LogIn extends React.Component {
                         <input type="password" id="pwd" name="password" required/>
                         <br/>
                         {/* <button type="submit">SUBMIT</button> */}
-                        <button>SUBMIT</button>
+                        <button type='submit'>SUBMIT</button>
                     </fieldset>
                     </form>
                     

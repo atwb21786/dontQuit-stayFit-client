@@ -1,33 +1,59 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import config from '../config'
+import TokenService from '../Service/token-service'
 
 class Goals extends React.Component {
+    
     state = {
         goals: []
     }
+
+    componentDidMount = () => {
+        fetch(`${config.API_ENDPOINT}/goals`)
+        .then(goalLog => {
+            if(!goalLog.ok) {
+                return goalLog.json().then((e) => Promise.reject(e))
+            }
+            return goalLog.json()
+        })
+        .then(goalLog => {
+            this.setState({
+                goals: goalLog,
+                date_created: new Date()
+            })
+        })
+    }
+
     
-    addGoal = e => {
+    handleAddGoal = e => {
         e.preventDefault()
         const goal = e.target.content.value;
         fetch(`${config.API_ENDPOINT}/goals`, {
-            method: 'POST',
+            method: 'POST', 
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${TokenService.getAuthToken()}`
+
             },
             body: JSON.stringify({
                 content: goal,
                 date_created: new Date()
-            }) 
+            })
         })
-        this.setState({
-            goals: [...this.state.goals, {
-                content: goal,
-                date_created: new Date()
-            }]
+        .then(res => res.json())
+        .then(() => {
+            this.setState({
+                goals: [...this.state.goals, {
+                    content: goal,
+                    date_created: new Date()
+                }]
+            })
+            this.props.history.push('/goals')
         })
-        
     }
+
+    
 
     deleteGoal = index => {
         this.setState({
@@ -50,7 +76,7 @@ class Goals extends React.Component {
                 </header>
                 <main>
                     <h4>WHAT ARE YOUR GOALS?</h4>
-                        <form onSubmit={this.addGoal}>
+                        <form onSubmit={this.handleAddGoal}>
                             <label htmlFor='goals'></label>
                             <textarea name="content"></textarea>
                             <br/>
@@ -67,6 +93,7 @@ class Goals extends React.Component {
                             <button onClick={e => this.deleteGoal(index)}>Delete</button>
                                 {goal.content}
                                 {goal.date_created.toString()}
+
                             </li>
                         ))}
                     </ul>
