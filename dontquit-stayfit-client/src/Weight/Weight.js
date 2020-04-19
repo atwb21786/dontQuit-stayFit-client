@@ -86,7 +86,7 @@ class Weight extends React.Component {
                                 
                                 <li key={index}>
                                 <button onClick={(e) => this.deleteWeight(index)}>Delete</button>
-                                    {item.data}
+                                    {item.measurement}
                                     {item.date_created.toString()}
                                 </li>
                             ))}

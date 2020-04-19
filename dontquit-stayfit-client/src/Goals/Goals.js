@@ -55,11 +55,23 @@ class Goals extends React.Component {
 
     
 
-    deleteGoal = index => {
-        this.setState({
-            goal: this.state.goals.splice(index, 1)
+    deleteGoal = (e, index) => {
+        e.preventDefault();
+        console.log(index)
+        fetch(`${config.API_ENDPOINT}/goals/${index}`, {
+            method: 'DELETE', 
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${TokenService.getAuthToken()}`
+            }
         })
-
+        .then(res => res.json().then(e => Promise.reject(e)))
+        .then(() => {
+            this.setState({
+                goal: this.state.goals.splice(index, 1)
+            })
+        })
+        
     }
 
 
@@ -90,7 +102,7 @@ class Goals extends React.Component {
                         {this.state.goals.map((goal, index) => (
                             
                             <li key={index}>
-                            <button onClick={e => this.deleteGoal(index)}>Delete</button>
+                            <button onClick={e => this.deleteGoal(e, index)}>Delete</button>
                                 {goal.content}
                                 {goal.date_created.toString()}
 

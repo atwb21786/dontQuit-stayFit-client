@@ -1,30 +1,59 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import config from '../config'
+import TokenService from '../Service/token-service'
 
 class Accountability extends React.Component {
     state = {
-        feedback: [
-            {
-                content: 'I wish to feel great every day!',
-                date_created: new Date()
+        feedback: []
+    }
+
+    componentDidMount = () => {
+        fetch(`${config.API_ENDPOINT}/feedback`)
+        .then(feedbackLog => {
+            if(!feedbackLog.ok) {
+                return feedbackLog.json().then((e) => Promise.reject(e))
             }
-        ]
+            return feedbackLog.json()
+        })
+        .then(feedbackLog => {
+            this.setState({
+                feedback: feedbackLog,
+                date_created: new Date()
+            })
+        })
     }
 
     addFeedback = e => {
         e.preventDefault();
-        const item = e.target.content.value;
-        this.setState({
-            feedback: [...this.state.feedback, {
-                content: item,
+        const fb = e.target.content.value;
+        fetch(`${config.API_ENDPOINT}/feedback`, {
+            method: 'POST', 
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${TokenService.getAuthToken()}`
+
+            },
+            body: JSON.stringify({
+                content: fb,
                 date_created: new Date()
-            }]
+            })
         })
+        .then(res => res.json())
+        .then(() => {
+            this.setState({
+                feedback: [...this.state.feedback, {
+                    content: fb,
+                    date_created: new Date()
+                }]
+            })
+        })
+        
     }
 
     deleteFeedback = index => {
         this.setState({
-            goal: this.state.feedback.splice(index, 1)
+            fb: this.state.feedback.splice(index, 1)
         })
 
     }
