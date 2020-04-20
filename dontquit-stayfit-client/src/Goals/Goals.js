@@ -73,6 +73,31 @@ class Goals extends React.Component {
         })   
     }
 
+    updateData = (e, data) => {
+        e.preventDefault()
+        const update = e.currentTarget;
+        fetch(`${config.API_ENDPOINT}/goals/${update}`, {
+            method: 'PATCH', 
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${TokenService.getAuthToken()}`
+            },
+            body: JSON.stringify(data)
+        })
+        .then(res => res.json())
+        .then((goal) => {
+            this.setState({
+                goals: [...this.state.goals, goal]
+            })
+            this.handleAddGoal(e)
+            this.props.history.push('/goals')
+        })
+    }
+
+    handleClickCancel = () => {
+        this.props.history.push('/homepage')
+    }
+
 
 
 
@@ -94,7 +119,7 @@ class Goals extends React.Component {
                             <textarea name="content"></textarea>
                             <br/>
                             <button type='submit'>ENTER</button>
-                            <button type='submit'>CANCEL</button>
+                            <button type='submit' onClick={this.handleClickCancel}>CANCEL</button>
                         </form>
                         
                     <br/>
@@ -104,6 +129,14 @@ class Goals extends React.Component {
                             
                             <li key={index}>
                             <button onClick={(e) => this.deleteGoal(e, goal.id)}>Delete</button>
+                            <button onClick={(e) => this.updateData(e, goal.id)}>Update</button>
+                            <form onSubmit={this.updateData} >
+                                <label htmlFor='goals'></label>
+                                <textarea name="content"></textarea>
+                                <br/>
+                                <button type='submit'>ENTER</button>
+                                <button type='submit'>CANCEL</button>
+                            </form>
                                 {goal.content}
                                 {goal.date_created.toString()}
 
