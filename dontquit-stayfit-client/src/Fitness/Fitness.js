@@ -41,22 +41,33 @@ class Fitness extends React.Component {
             })
         })
         .then(res => res.json())
-        .then(() => {
+        .then((workout) => {
             this.setState({
-                fitness: [...this.state.fitness, {
-                    content: fit,
-                    date_created: new Date()
-                }]
+                fitness: [...this.state.fitness, workout]
             })
             this.props.history.push('/fitness')
         })
     }
 
-    deleteWorkout = index => {
-        this.setState({
-            goal: this.state.fitness.splice(index, 1)
+    deleteWorkout = (e, index) => {
+        e.preventDefault()
+        console.log(index)
+        fetch(`${config.API_ENDPOINT}/fitness/${index}`, {
+            method: 'DELETE', 
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${TokenService.getAuthToken()}`
+            }
         })
-
+        .then(res => { 
+            if (!res.ok) 
+                return res.json().then(e => Promise.reject(e))
+        })
+        .then(() => {
+            this.setState({
+                fitness: this.state.fitness.filter(fit => fit.id !== index)
+            })
+        })   
     }
     
     render() {
@@ -84,7 +95,7 @@ class Fitness extends React.Component {
                         {this.state.fitness.map((item, index) => (
                                 
                                 <li key={index}>
-                                <button onClick={(e) => this.deleteWorkout(index)}>Delete</button>
+                                <button onClick={(e) => this.deleteWorkout(e, item.id)}>Delete</button>
                                     {item.content}
                                     {item.date_created.toString()}
                                 </li>

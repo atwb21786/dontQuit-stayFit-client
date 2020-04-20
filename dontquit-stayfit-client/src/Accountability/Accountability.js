@@ -40,23 +40,35 @@ class Accountability extends React.Component {
             })
         })
         .then(res => res.json())
-        .then(() => {
+        .then((fb) => {
             this.setState({
-                feedback: [...this.state.feedback, {
-                    content: fb,
-                    date_created: new Date()
-                }]
+                feedback: [...this.state.feedback, fb]
             })
         })
         
     }
 
-    deleteFeedback = index => {
-        this.setState({
-            fb: this.state.feedback.splice(index, 1)
+    deleteFeedback = (e, index) => {
+        e.preventDefault()
+        console.log(index)
+        fetch(`${config.API_ENDPOINT}/feedback/${index}`, {
+            method: 'DELETE', 
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${TokenService.getAuthToken()}`
+            }
         })
-
+        .then(res => { 
+            if (!res.ok) 
+                return res.json().then(e => Promise.reject(e))
+        })
+        .then(() => {
+            this.setState({
+                feedback: this.state.feedback.filter(fb => fb.id !== index)
+            })
+        })   
     }
+
     
     render() {
         return(
@@ -83,7 +95,7 @@ class Accountability extends React.Component {
                         {this.state.feedback.map((item, index) => (
                                 
                                 <li key={index}>
-                                <button onClick={(e) => this.deleteFeedback(index)}>Delete</button>
+                                <button onClick={(e) => this.deleteFeedback(e, item.id)}>Delete</button>
                                     {item.content}
                                     {item.date_created.toString()}
                                 </li>

@@ -42,12 +42,9 @@ class Goals extends React.Component {
             })
         })
         .then(res => res.json())
-        .then(() => {
+        .then((goal) => {
             this.setState({
-                goals: [...this.state.goals, {
-                    content: goal,
-                    date_created: new Date()
-                }]
+                goals: [...this.state.goals, goal]
             })
             this.props.history.push('/goals')
         })
@@ -56,7 +53,7 @@ class Goals extends React.Component {
     
 
     deleteGoal = (e, index) => {
-        e.preventDefault();
+        e.preventDefault()
         console.log(index)
         fetch(`${config.API_ENDPOINT}/goals/${index}`, {
             method: 'DELETE', 
@@ -65,14 +62,18 @@ class Goals extends React.Component {
                 'Authorization': `Bearer ${TokenService.getAuthToken()}`
             }
         })
-        .then(res => res.json().then(e => Promise.reject(e)))
+        .then(res => { 
+            if (!res.ok) 
+                return res.json().then(e => Promise.reject(e))
+        })
         .then(() => {
             this.setState({
-                goal: this.state.goals.splice(index, 1)
+                goals: this.state.goals.filter(goal => goal.id !== index)
             })
-        })
-        
+        })   
     }
+
+
 
 
 
@@ -102,7 +103,7 @@ class Goals extends React.Component {
                         {this.state.goals.map((goal, index) => (
                             
                             <li key={index}>
-                            <button onClick={e => this.deleteGoal(e, index)}>Delete</button>
+                            <button onClick={(e) => this.deleteGoal(e, goal.id)}>Delete</button>
                                 {goal.content}
                                 {goal.date_created.toString()}
 

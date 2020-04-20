@@ -12,7 +12,7 @@ class LandingPage extends React.Component {
                     <Link to='/login'>SIGN IN!</Link>
                 </main>
                 <footer>
-                    <p>Demo username: abc</p>
+                    <p>Demo username: ABC</p>
                     <p>Demo password: 123</p>
                 </footer>
                 

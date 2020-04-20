@@ -25,7 +25,7 @@ class Weight extends React.Component {
         })
     }
 
-    addWeight = e => {
+    handleAddWeight = e => {
         e.preventDefault();
         const item = e.target.content.value;
         fetch(`${config.API_ENDPOINT}/weigh_in`, {
@@ -41,22 +41,33 @@ class Weight extends React.Component {
             })
         })
         .then(res => res.json())
-        .then(() => {
+        .then((weight) => {
             this.setState({
-                weight: [...this.state.weight, {
-                    measurement: item,
-                    date_created: new Date()
-                }]
+                weight: [...this.state.weight, weight]
             })
             this.props.history.push('/weight')
         })
     }
 
-    deleteWeight = index => {
-        this.setState({
-            wt: this.state.weight.splice(index, 1)
+    deleteWeight = (e, index) => {
+        e.preventDefault()
+        console.log(index)
+        fetch(`${config.API_ENDPOINT}/weigh_in/${index}`, {
+            method: 'DELETE', 
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${TokenService.getAuthToken()}`
+            }
         })
-
+        .then(res => { 
+            if (!res.ok) 
+                return res.json().then(e => Promise.reject(e))
+        })
+        .then(() => {
+            this.setState({
+                weight: this.state.weight.filter(wt => wt.id !== index)
+            })
+        })   
     }
 
     render() {
@@ -71,7 +82,7 @@ class Weight extends React.Component {
                 </header>
                 <main>
                     <h4>ENTER WEIGHT</h4>
-                        <form onSubmit={this.addWeight}>
+                        <form onSubmit={this.handleAddWeight}>
                             <label htmlFor="content"></label>
                             <input type="number" id="content" name="content"/>
                             <br/>
@@ -85,7 +96,7 @@ class Weight extends React.Component {
                         {this.state.weight.map((item, index) => (
                                 
                                 <li key={index}>
-                                <button onClick={(e) => this.deleteWeight(index)}>Delete</button>
+                                <button onClick={(e) => this.deleteWeight(e, item.id)}>Delete</button>
                                     {item.measurement}
                                     {item.date_created.toString()}
                                 </li>
