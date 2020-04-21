@@ -33,22 +33,6 @@ class LogIn extends React.Component {
 
     }
 
-    // handleSubmitBasicAuth = ev => {
-    //     ev.preventDefault()
-    //     const { user_name, password } = ev.target
-    
-    //     TokenService.saveAuthToken(
-    //       TokenService.makeBasicAuthToken(user_name.value, password.value)
-    //     )
-    
-    //     user_name.value = ''
-    //     password.value = ''
-    //     this.props.onLoginSuccess()
-    //   }
-
-    
-
-
     render() {
         return (
             <div>

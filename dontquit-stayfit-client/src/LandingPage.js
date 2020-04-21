@@ -10,6 +10,7 @@ class LandingPage extends React.Component {
                 </header>
                 <main>
                     <Link to='/login'>SIGN IN!</Link>
+                    <Link to='/register'>REGISTER HERE!</Link>
                 </main>
                 <footer>
                     <p>Demo username: ABC</p>

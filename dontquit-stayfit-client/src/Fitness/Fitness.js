@@ -6,7 +6,8 @@ import TokenService from '../Service/token-service'
 class Fitness extends React.Component {
     
     state = {
-        fitness: []
+        fitness: [],
+        editFitness: null
     }
 
     componentDidMount = () => {
@@ -47,6 +48,7 @@ class Fitness extends React.Component {
             })
             this.props.history.push('/fitness')
         })
+        e.target.reset()
     }
 
     deleteWorkout = (e, index) => {
@@ -69,6 +71,49 @@ class Fitness extends React.Component {
             })
         })   
     }
+
+    updateData = (e) => {
+        e.preventDefault()
+        const data = { 
+            content: e.target.content.value
+        }
+        fetch(`${config.API_ENDPOINT}/fitness/${this.state.editFitness}`, {
+            method: 'PATCH', 
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${TokenService.getAuthToken()}`
+            },
+            body: JSON.stringify(data)
+        })
+        .then((goal) => {
+            this.setState({
+                fitness: this.state.fitness.map(workout => { 
+                    if(workout.id === this.state.editFitness) {
+                        workout.content = data.content
+                    }
+                    return workout
+                }), 
+                editFitness: null
+            })
+            this.props.history.push('/fitness')
+        })
+    }
+
+    openEdit = (id) => {
+        this.setState({
+            editFitness: id
+        })
+    }
+
+    cancelAddedWorkout = () => {
+        this.setState({
+            editFitness: null
+        })
+    }
+
+    handleClickCancel = () => {
+        this.props.history.push('/homepage')
+    }
     
     render() {
         return(
@@ -87,7 +132,7 @@ class Fitness extends React.Component {
                             <textarea name='content' required></textarea>
                             <br/>
                             <button type='submit'>ENTER</button>
-                            <button type='submit'>CANCEL</button>
+                            <button type='submit' onClick={this.handleClickCancel}>CANCEL</button>
                         </form>
                     <br/>
                     <h4>FITNESS LOG:</h4>
@@ -96,8 +141,18 @@ class Fitness extends React.Component {
                                 
                                 <li key={index}>
                                 <button onClick={(e) => this.deleteWorkout(e, item.id)}>Delete</button>
+                                <button onClick={() => this.openEdit(item.id)}>Update</button>
+                                {this.state.editFitness === item.id ? 
+                                (<form onSubmit={this.updateData}>
+                                    <label htmlFor="fitness"></label>
+                                    <textarea name='content' required></textarea>
+                                    <br/>
+                                    <button type='submit'>ENTER</button>
+                                    <button type='submit' onClick={this.cancelAddedWorkout}>CANCEL</button>
+                                </form>) : "" }
+
                                     {item.content}
-                                    {item.date_created.toString()}
+                                    {item.date_created}
                                 </li>
                             ))}
                     </ul>

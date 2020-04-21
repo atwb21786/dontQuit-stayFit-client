@@ -6,7 +6,8 @@ import TokenService from '../Service/token-service'
 class Weight extends React.Component {
 
     state = {
-        weight: []
+        weight: [],
+        editWeight: null
     }
 
     componentDidMount = () => {
@@ -41,12 +42,13 @@ class Weight extends React.Component {
             })
         })
         .then(res => res.json())
-        .then((weight) => {
+        .then((weights) => {
             this.setState({
-                weight: [...this.state.weight, weight]
+                weight: [...this.state.weight, weights]
             })
             this.props.history.push('/weight')
         })
+        e.target.reset()
     }
 
     deleteWeight = (e, index) => {
@@ -70,6 +72,52 @@ class Weight extends React.Component {
         })   
     }
 
+    updateData = (e) => {
+        e.preventDefault()
+        const data = { 
+            measurement: e.target.content.value
+        }
+        fetch(`${config.API_ENDPOINT}/weigh_in/${this.state.editWeight}`, {
+            method: 'PATCH', 
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${TokenService.getAuthToken()}`
+            },
+            body: JSON.stringify(data)
+        })
+        .then((wt) => {
+            this.setState({
+                weight: this.state.weight.map(wt => { 
+                    if(wt.id === this.state.editWeight) {
+                        wt.measurement = data.measurement
+                    }
+                    console.log(wt)
+                    return wt
+                }), 
+                editWeight: null
+            })
+            this.props.history.push('/weight')
+        })
+    }
+
+    openEdit = (id) => {
+        this.setState({
+            editWeight: id
+        })
+    }
+
+    cancelAddedWeight = () => {
+        this.setState({
+            editWeight: null
+        })
+    }
+
+    handleClickCancel = () => {
+        this.props.history.push('/homepage')
+    }
+
+
+
     render() {
         return(
             <div>
@@ -84,10 +132,10 @@ class Weight extends React.Component {
                     <h4>ENTER WEIGHT</h4>
                         <form onSubmit={this.handleAddWeight}>
                             <label htmlFor="content"></label>
-                            <input type="number" id="content" name="content"/>
+                            <input type="number" step="0.1" id="content" name="content" required/>
                             <br/>
                             <button type='submit'>ENTER</button>
-                            <button type='submit'>CANCEL</button>
+                            <button type='submit' onClick={this.handleClickCancel}>CANCEL</button>
 
                         </form>
                     
@@ -97,8 +145,19 @@ class Weight extends React.Component {
                                 
                                 <li key={index}>
                                 <button onClick={(e) => this.deleteWeight(e, item.id)}>Delete</button>
+                                <button onClick={() => this.openEdit(item.id)}>Update</button>
+                                {this.state.editWeight === item.id ? 
+                                (<form onSubmit={this.updateData}>
+                                    <label htmlFor="content"></label>
+                                    <input type="number" step="0.1" id="content" name="content" required/>
+                                    <br/>
+                                    <button type='submit'>ENTER</button>
+                                    <button type='submit' onClick={this.cancelAddedWeight}>CANCEL</button>
+                                </form>) : "" }
+
                                     {item.measurement}
-                                    {item.date_created.toString()}
+                                    {item.date_created}
+
                                 </li>
                             ))}
                     </ul>

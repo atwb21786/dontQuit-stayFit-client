@@ -1,27 +1,21 @@
 import React from 'react'
+import ApiAuthService from './Service/api-auth-service'
 
 
 class Register extends React.Component {
 
-    loginSubmit = e => {
-        e.preventDefault();
-        fetch('http://localhost:8000/users', {
-            method: "POST",
-            headers: {
-                "Content-type": "application/json",
+    getUserCredentials = (e) => {
+        e.preventDefault()
+        const username = e.target.user_name.value
+        const password = e.target.password.value
 
-            }, 
-            body: JSON.stringify({
-                
-                    user_name: e.target.user_name.value,
-                    password: e.target.password.value,
-                
-            })
+        ApiAuthService.getRegister({
+            user_name: username,
+            password: password
         })
-            .then(res => res.json())
-            .then(data => {
-                console.log(data)
-            })
+        .then(() => {
+            this.props.history.push('/login')
+        })
     }
 
     render() {
@@ -31,7 +25,7 @@ class Register extends React.Component {
                     <h2>DON'T QUIT STAY FIT!</h2>
                 </header>
                 <main>
-                    <form onSubmit={this.loginSubmit}>
+                    <form onSubmit={this.getUserCredentials}>
                     <fieldset>
                         <label htmlFor="username">USERNAME:</label>
                         <input type="text" id="username" name="user_name" required/>

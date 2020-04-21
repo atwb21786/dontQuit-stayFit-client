@@ -6,7 +6,8 @@ import TokenService from '../Service/token-service'
 class Goals extends React.Component {
     
     state = {
-        goals: []
+        goals: [],
+        editGoal: null
     }
 
     componentDidMount = () => {
@@ -48,6 +49,7 @@ class Goals extends React.Component {
             })
             this.props.history.push('/goals')
         })
+        e.target.reset()
     }
 
     
@@ -73,10 +75,12 @@ class Goals extends React.Component {
         })   
     }
 
-    updateData = (e, data) => {
+    updateData = (e) => {
         e.preventDefault()
-        const update = e.currentTarget;
-        fetch(`${config.API_ENDPOINT}/goals/${update}`, {
+        const data = { 
+            content: e.target.content.value
+        }
+        fetch(`${config.API_ENDPOINT}/goals/${this.state.editGoal}`, {
             method: 'PATCH', 
             headers: {
                 'Content-Type': 'application/json',
@@ -84,23 +88,35 @@ class Goals extends React.Component {
             },
             body: JSON.stringify(data)
         })
-        .then(res => res.json())
         .then((goal) => {
             this.setState({
-                goals: [...this.state.goals, goal]
+                goals: this.state.goals.map(goal => { 
+                    if(goal.id === this.state.editGoal) {
+                        goal.content = data.content
+                    }
+                    return goal
+                }), 
+                editGoal: null
             })
-            this.handleAddGoal(e)
             this.props.history.push('/goals')
+        })
+    }
+
+    openEdit = (id) => {
+        this.setState({
+            editGoal: id
+        })
+    }
+
+    cancelAddedGoal = () => {
+        this.setState({
+            editGoal: null
         })
     }
 
     handleClickCancel = () => {
         this.props.history.push('/homepage')
     }
-
-
-
-
 
     render() {
         return(
@@ -116,9 +132,9 @@ class Goals extends React.Component {
                     <h4>WHAT ARE YOUR GOALS?</h4>
                         <form onSubmit={this.handleAddGoal}>
                             <label htmlFor='goals'></label>
-                            <textarea name="content"></textarea>
+                            <textarea name="content" required></textarea>
                             <br/>
-                            <button type='submit'>ENTER</button>
+                            <button type='submit' >ENTER</button>
                             <button type='submit' onClick={this.handleClickCancel}>CANCEL</button>
                         </form>
                         
@@ -129,16 +145,18 @@ class Goals extends React.Component {
                             
                             <li key={index}>
                             <button onClick={(e) => this.deleteGoal(e, goal.id)}>Delete</button>
-                            <button onClick={(e) => this.updateData(e, goal.id)}>Update</button>
-                            <form onSubmit={this.updateData} >
+                            <button onClick={() => this.openEdit(goal.id)}>Update</button>
+                            {this.state.editGoal === goal.id ? 
+                            (<form onSubmit={this.updateData} >
                                 <label htmlFor='goals'></label>
-                                <textarea name="content"></textarea>
+                                <textarea name="content" required></textarea>
                                 <br/>
                                 <button type='submit'>ENTER</button>
-                                <button type='submit'>CANCEL</button>
-                            </form>
+                                <button type='submit' onClick={this.cancelAddedGoal}>CANCEL</button>
+                            </form>) : "" }
+                            
                                 {goal.content}
-                                {goal.date_created.toString()}
+                                {goal.date_created}
 
                             </li>
                         ))}

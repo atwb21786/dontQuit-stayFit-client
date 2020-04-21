@@ -5,7 +5,8 @@ import TokenService from '../Service/token-service'
 
 class Accountability extends React.Component {
     state = {
-        feedback: []
+        feedback: [],
+        editFeedback: null
     }
 
     componentDidMount = () => {
@@ -44,8 +45,9 @@ class Accountability extends React.Component {
             this.setState({
                 feedback: [...this.state.feedback, fb]
             })
+            this.props.history.push('/accountability')
         })
-        
+        e.target.reset()        
     }
 
     deleteFeedback = (e, index) => {
@@ -69,6 +71,49 @@ class Accountability extends React.Component {
         })   
     }
 
+    updateData = (e) => {
+        e.preventDefault()
+        const data = { 
+            content: e.target.content.value
+        }
+        fetch(`${config.API_ENDPOINT}/feedback/${this.state.editFeedback}`, {
+            method: 'PATCH', 
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${TokenService.getAuthToken()}`
+            },
+            body: JSON.stringify(data)
+        })
+        .then((fb) => {
+            this.setState({
+                feedback: this.state.feedback.map(fb => { 
+                    if(fb.id === this.state.editFeedback) {
+                        fb.content = data.content
+                    }
+                    return fb
+                }), 
+                editFeedback: null
+            })
+            this.props.history.push('/accountability')
+        })
+    }
+
+    openEdit = (id) => {
+        this.setState({
+            editFeedback: id
+        })
+    }
+
+    cancelAddedFeedback = () => {
+        this.setState({
+            editFeedback: null
+        })
+    }
+
+    handleClickCancel = () => {
+        this.props.history.push('/homepage')
+    }
+
     
     render() {
         return(
@@ -83,11 +128,11 @@ class Accountability extends React.Component {
                 <main>
                     <h4>REFLECT ON TODAY, PLAN FOR TOMORROW</h4>
                         <form onSubmit={this.addFeedback}>
-                            <label htmlFor="feedback"></label>
-                            <textarea name='content'></textarea>
+                            <label htmlFor="accountability"></label>
+                            <textarea name='content' required></textarea>
                             <br/>
                             <button type='submit'>ENTER</button>
-                            <button type='submit'>CANCEL</button>
+                            <button type='submit' onClick={this.handleClickCancel}>CANCEL</button>
                         </form>
                     <br/>
                     <h4>ACCOUNTABILITY LOG:</h4>
@@ -96,8 +141,18 @@ class Accountability extends React.Component {
                                 
                                 <li key={index}>
                                 <button onClick={(e) => this.deleteFeedback(e, item.id)}>Delete</button>
+                                <button onClick={() => this.openEdit(item.id)}>Update</button>
+                                {this.state.editFeedback === item.id ? 
+                                (<form onSubmit={this.updateData}>
+                                    <label htmlFor="accountability"></label>
+                                    <textarea name='content' required></textarea>
+                                    <br/>
+                                    <button type='submit'>ENTER</button>
+                                    <button type='submit' onClick={this.cancelAddedFeedback}>CANCEL</button>
+                                </form>) : "" }
+
                                     {item.content}
-                                    {item.date_created.toString()}
+                                    {item.date_created}
                                 </li>
                             ))}
                     </ul>
