@@ -1,5 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import Header from '../Header/Header'
 import config from '../config'
 import TokenService from '../Service/token-service'
 
@@ -118,12 +119,8 @@ class Accountability extends React.Component {
     render() {
         return(
             <div>
-                <nav>
-                    <Link to='/homepage' >HOME</Link>
-                    <Link to='/' >LOGOUT</Link>
-                </nav>
                 <header>
-                    <h2>DON'T QUIT STAY FIT!</h2>
+                    <Header />
                 </header>
                 <main>
                     <h4>REFLECT ON TODAY, PLAN FOR TOMORROW</h4>
