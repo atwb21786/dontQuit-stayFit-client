@@ -4,6 +4,8 @@ import ApiAuthService from './Service/api-auth-service'
 
 class Register extends React.Component {
 
+    state = { error: null }
+
     getUserCredentials = (e) => {
         e.preventDefault()
         const username = e.target.user_name.value
@@ -16,9 +18,13 @@ class Register extends React.Component {
         .then(() => {
             this.props.history.push('/login')
         })
+        .catch(res => {
+            this.setState({ error: res.error })
+        })
     }
 
     render() {
+        const error = this.state.error
         return (
             <div>
                 <header>
@@ -37,7 +43,7 @@ class Register extends React.Component {
                         <button>SUBMIT</button>
                     </fieldset>
                     </form>
-                    
+                    <div>{error}</div>
                 </main>
             </div>
 

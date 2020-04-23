@@ -34,6 +34,7 @@ class LogIn extends React.Component {
     }
 
     render() {
+        const error = this.state.error
         return (
             <div>
                 <header>
@@ -52,7 +53,7 @@ class LogIn extends React.Component {
                         <button type='submit'>SUBMIT</button>
                     </fieldset>
                     </form>
-                    
+                    <div>{error}</div>
                 </main>
             </div>
 
