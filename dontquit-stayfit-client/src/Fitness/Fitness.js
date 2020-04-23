@@ -1,5 +1,4 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
 import config from '../config'
 import TokenService from '../Service/token-service'
 
@@ -11,7 +10,11 @@ class Fitness extends React.Component {
     }
 
     componentDidMount = () => {
-        fetch(`${config.API_ENDPOINT}/fitness`)
+        fetch(`${config.API_ENDPOINT}/fitness`, {
+            headers: {
+                'Authorization': `Bearer ${TokenService.getAuthToken()}`
+            },
+        })
         .then(fitnessLog => {
             if(!fitnessLog.ok) {
                 return fitnessLog.json().then((e) => Promise.reject(e))
@@ -118,13 +121,6 @@ class Fitness extends React.Component {
     render() {
         return(
             <div>
-                <nav>
-                    <Link to='/homepage' >HOME</Link>
-                    <Link to='/' >LOGOUT</Link>
-                </nav>
-                <header>
-                    <h2>DON'T QUIT STAY FIT!</h2>
-                </header>
                 <main>
                     <h4>ENTER WORKOUT</h4>
                         <form onSubmit={this.addWorkoutForm}>

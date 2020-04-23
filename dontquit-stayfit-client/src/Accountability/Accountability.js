@@ -1,6 +1,4 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
-import Header from '../Header/Header'
 import config from '../config'
 import TokenService from '../Service/token-service'
 
@@ -11,7 +9,11 @@ class Accountability extends React.Component {
     }
 
     componentDidMount = () => {
-        fetch(`${config.API_ENDPOINT}/feedback`)
+        fetch(`${config.API_ENDPOINT}/feedback`, {
+            headers: {
+                'Authorization': `Bearer ${TokenService.getAuthToken()}`
+            },
+        })
         .then(feedbackLog => {
             if(!feedbackLog.ok) {
                 return feedbackLog.json().then((e) => Promise.reject(e))
@@ -119,9 +121,6 @@ class Accountability extends React.Component {
     render() {
         return(
             <div>
-                <header>
-                    <Header />
-                </header>
                 <main>
                     <h4>REFLECT ON TODAY, PLAN FOR TOMORROW</h4>
                         <form onSubmit={this.addFeedback}>

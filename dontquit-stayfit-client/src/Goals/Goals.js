@@ -1,5 +1,4 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
 import config from '../config'
 import TokenService from '../Service/token-service'
 
@@ -11,7 +10,11 @@ class Goals extends React.Component {
     }
 
     componentDidMount = () => {
-        fetch(`${config.API_ENDPOINT}/goals`)
+        fetch(`${config.API_ENDPOINT}/goals`, {
+            headers: {
+                'Authorization': `Bearer ${TokenService.getAuthToken()}`
+            },
+        })
         .then(goalLog => {
             if(!goalLog.ok) {
                 return goalLog.json().then((e) => Promise.reject(e))
@@ -121,23 +124,14 @@ class Goals extends React.Component {
     render() {
         return(
             <div>
-                <nav>
-                    <Link to='/homepage' >HOME</Link>
-                    <Link to='/' >LOGOUT</Link>
-                </nav>
-                <header>
-                    <h2>DON'T QUIT STAY FIT!</h2>
-                </header>
                 <main>
-                    <h4>WHAT ARE YOUR GOALS?</h4>
-                        <form onSubmit={this.handleAddGoal}>
-                            <label htmlFor='goals'></label>
-                            <textarea name="content" required></textarea>
-                            <br/>
-                            <button type='submit' >ENTER</button>
-                            <button type='submit' onClick={this.handleClickCancel}>CANCEL</button>
-                        </form>
-                        
+                    <form onSubmit={this.handleAddGoal}>
+                        <label htmlFor='goals'></label>
+                        <textarea name="content" required></textarea>
+                        <br/>
+                        <button type='submit' >ENTER</button>
+                        <button type='submit' onClick={this.handleClickCancel}>CANCEL</button>
+                    </form>
                     <br/>
                     <h4>GOALS:</h4>
                     <ul>

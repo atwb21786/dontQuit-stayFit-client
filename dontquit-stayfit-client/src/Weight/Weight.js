@@ -1,5 +1,4 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
 import config from '../config'
 import TokenService from '../Service/token-service'
 
@@ -11,7 +10,11 @@ class Weight extends React.Component {
     }
 
     componentDidMount = () => {
-        fetch(`${config.API_ENDPOINT}/weigh_in`)
+        fetch(`${config.API_ENDPOINT}/weigh_in`, {
+            headers: {
+                'Authorization': `Bearer ${TokenService.getAuthToken()}`
+            },
+        })
         .then(weightLog => {
             if(!weightLog.ok) {
                 return weightLog.json().then((e) => Promise.reject(e))
@@ -121,13 +124,6 @@ class Weight extends React.Component {
     render() {
         return(
             <div>
-                <nav>
-                    <Link to='/homepage' >HOME</Link>
-                    <Link to='/' >LOGOUT</Link>
-                </nav>
-                <header>
-                    <h2>DON'T QUIT STAY FIT!</h2>
-                </header>
                 <main>
                     <h4>ENTER WEIGHT</h4>
                         <form onSubmit={this.handleAddWeight}>

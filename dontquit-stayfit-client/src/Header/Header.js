@@ -6,7 +6,7 @@ class Header extends React.Component {
 
     handleLogoutClick = () => {
         TokenService.clearAuthToken()
-        this.props.history.go('/')
+        this.props.history.push('/')
     }
 
     renderLogoutLink() {
@@ -22,7 +22,7 @@ class Header extends React.Component {
             <div>
                 <nav>
                     <Link to='/homepage'>HOME</Link>
-                    {TokenService.hasAuthToken() ? this.renderLogoutLink : null}
+                    {TokenService.hasAuthToken() ? this.renderLogoutLink() : "" }
                 </nav>
                 <header>
                     <h2>DON'T QUIT STAY FIT!</h2>
