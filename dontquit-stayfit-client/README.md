@@ -1,6 +1,6 @@
 THE DONT QUIT STAY FIT APP
 
-[DONT QUIT STAY FIT APP](dontquit-stayfit-client.now.sh)
+[DONT QUIT STAY FIT APP](http://dontquit-stayfit-client.now.sh)
 
 [Opening Page](capstonepage.png)
 
