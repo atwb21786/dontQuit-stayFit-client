@@ -1,4 +1,5 @@
 import React from 'react'
+import './Login.css'
 import TokenService from './Service/token-service'
 import ApiAuthService from './Service/api-auth-service'
 
@@ -38,9 +39,10 @@ class LogIn extends React.Component {
         return (
             <div>
                 <header>
-                    <h2>DON'T QUIT STAY FIT!</h2>
+                    <h2 className="logintitle">DON'T QUIT STAY FIT!</h2>
                 </header>
                 <main>
+                    <h3>Log In</h3>
                     <form onSubmit={this.handleJWTSubmission}>
                     <fieldset>
                         <label htmlFor="username">USERNAME:</label>

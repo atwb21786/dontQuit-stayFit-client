@@ -1,0 +1,28 @@
+body{
+    margin: 0 auto;
+    text-align: center;
+}
+
+.title {
+    color: black;
+    font-size: 30px;
+    margin-bottom: 225px;
+}
+
+.welcome {
+    margin-left: 265px;
+    margin-right: 265px;
+    margin-bottom: 50px;
+    color: white;
+}
+
+.links {
+    margin: 15px;
+    margin-bottom: 20px;
+    color: white;
+}
+
+.demo-data {
+    margin-top: 50px;
+    color: white;
+}

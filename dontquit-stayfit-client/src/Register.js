@@ -1,4 +1,5 @@
 import React from 'react'
+import './Register.css'
 import ApiAuthService from './Service/api-auth-service'
 
 
@@ -28,13 +29,14 @@ class Register extends React.Component {
         return (
             <div>
                 <header>
-                    <h2>DON'T QUIT STAY FIT!</h2>
+                    <h2 className="regtitle">DON'T QUIT STAY FIT!</h2>
                 </header>
                 <main>
                     <form onSubmit={this.getUserCredentials}>
+                        <h3>REGISTRATION</h3>
                     <fieldset>
                         <label htmlFor="username">USERNAME:</label>
-                        <input type="text" id="username" name="user_name" required/>
+                        <input type="text" id="username" name="user_name" sizerequired/>
                         <br/>
                         <label htmlFor="pwd">PASSWORD:</label>
                         <input type="password" id="pwd" name="password" required/>
