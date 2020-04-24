@@ -1,6 +1,7 @@
 {
     "version": 2,
-    "name": "stayfit-app",
+    "alias": "stayfit-app",
+    "name": "dontquit-stayfit-app",
     "routes": [
         { "handle": "filesystem" },
         { "src": "/.*", "dest": "/index.html" }

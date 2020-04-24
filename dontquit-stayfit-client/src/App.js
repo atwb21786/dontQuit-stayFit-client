@@ -1,4 +1,5 @@
 import React from 'react';
+import './App.css';
 import LandingPage from './LandingPage';
 import Header from './Header/Header'
 import LogIn from './LogIn';
@@ -16,7 +17,7 @@ class App extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className="App">
         <header>
           <PrivateRoute path={['/homepage', '/goals', '/weight', '/fitness', '/accountability']}
             component={Header}/>
