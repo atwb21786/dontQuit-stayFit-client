@@ -1,0 +1,22 @@
+* {
+    box-sizing: border-box;
+}
+
+nav .link{
+    display: block;
+    font-size: 25px;
+    color: black
+}
+
+nav {
+    top: 0;
+    left: 0;
+    right: 0;
+}
+
+.headtitle {
+    display: block;
+    color: black;
+    font-size: 30px;
+    margin-bottom: 150px;
+}

@@ -1,4 +1,5 @@
 import React from 'react'
+import './Header.css'
 import { Link } from 'react-router-dom'
 import TokenService from '../Service/token-service'
 
@@ -12,7 +13,7 @@ class Header extends React.Component {
     renderLogoutLink() {
         return (
             <div>
-                <Link onClick={this.handleLogoutClick} to='/'>LOGOUT</Link>
+                <Link onClick={this.handleLogoutClick} to='/' className='link'>LOGOUT</Link>
             </div>
         )
     }
@@ -21,11 +22,11 @@ class Header extends React.Component {
         return(
             <div>
                 <nav>
-                    <Link to='/homepage'>HOME</Link>
+                    <Link to='/homepage' className='link'>HOME</Link>
                     {TokenService.hasAuthToken() ? this.renderLogoutLink() : "" }
                 </nav>
                 <header>
-                    <h2>DON'T QUIT STAY FIT!</h2>
+                    <h2 className="headtitle">DON'T QUIT STAY FIT!</h2>
                 </header>
             </div>
         )
