@@ -2,7 +2,7 @@ THE DONT QUIT STAY FIT APP
 
 [DONT QUIT STAY FIT APP](http://dontquit-stayfit-client.now.sh)
 
-[Opening Page](capstonepage.png)
+<img src="capstonepage.png" alt="Landing Page">
 
 Welcome to the "Don't Quit, Stay Fit!" fitness application!  
 
