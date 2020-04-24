@@ -1,3 +1,11 @@
+THE DONT QUIT STAY FIT APP
+
+[DONT QUIT STAY FIT APP](dontquit-stayfit-client.now.sh)
+
+[Opening Page](capstonepage.png)
+
+Welcome to the "Don't Quit, Stay Fit!" fitness application!  
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
