@@ -1,76 +1,56 @@
-THE DONT QUIT STAY FIT APP
+## THE DONT QUIT STAY FIT APP
 
 [DONT QUIT STAY FIT APP](http://dontquit-stayfit-client.now.sh)
 
-<img src="/src/image/capstonepage.png" alt="Landing Page">
+<img src="/src/Image/capstonepage.png" alt="Landing Page">
 
 Welcome to the "Don't Quit, Stay Fit!" fitness application!  
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This application allows you to combine many of the functions that you would normally have to use in multiple fitness apps into just one!  This app provides you also with an
+opporunity to set goals and give yourself feedback with regards to how you are achieving those goals relative to your progress.  Whenever you enter a Goal, Weight, Exercise (Fitness) or Feedback (Accountability), you can chart your progress through the log that outputs beneath the input field, giving you the ability to see how you are doing and what you need to improve upon.  A great way to set goals and analyze your progress!
 
-## Available Scripts
+## In this app, you are able to:
+- Register an account.
+- Sign in with either the demo account or your own account
+- Access one of four links that allow you to enter data for Goals, Weight, Fitness and Feedback (Accountability)
+- You are about to enter data, delete data and update data.
+- You are able to cancel out of updating or entering data.
+- You are able to navigate back to the homepage from any of the four links.
+- You are able to logout and return to the Landing Page from any of the four webpages AND the homepage.
 
-In the project directory, you can run:
+## API Documentation: 
+- POST /users
+- https://whipsering-peak-20829.herokuapp.com/users
+- allows you to create a username and password for registration
 
-### `npm start`
+- POST /auth/login
+- https://whispering-peak-20829.herokuapp.com/auth/login
+- allows you to login once you enter the correct username, password combination
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+- POST /goals; POST /weigh_in; POST /fitness; POST /feedback
+- https://whispering-peak-20829.herokuapp.com/goals; https://whispering-peak-20829.herokuapp.com/weigh_in; https://whispering-peak-20829.herokuapp.com/fitness; https://whispering-peak-20829.herokuapp.com/feedback
+- allows you to post data to any of the four databases
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+- GET /goals; GET /weigh_in; GET /fitness; GET /feedback
+- https://whispering-peak-20829.herokuapp.com/goals/; https://whispering-peak-20829.herokuapp.com/weigh_in/; https://whispering-peak-20829.herokuapp.com/fitness/; https://whispering-peak-20829.herokuapp.com/feedback/
+- allows you to get data to the four databases for only the POST requests you have made
 
-### `npm test`
+- PATCH /goals; PATCH /weigh_in; PATCH /fitness; PATCH /feedback
+- https://whispering-peak-20829.herokuapp.com/goals/:goals_id; https://whispering-peak-20829.herokuapp.com/weigh_in/:weigh_in_id; https://whispering-peak-20829.herokuapp.com/fitness/fitness_id; https://whispering-peak-20829.herokuapp.com/feedback/feedback_id
+- allows you to update data 
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- DELETE /goals; DELETE /weigh_in; DELETE /fitness; DELETE /feedback
+- https://whispering-peak-20829.herokuapp.com/goals/:goals_id; https://whispering-peak-20829.herokuapp.com/weigh_in/:weigh_in_id; https://whispering-peak-20829.herokuapp.com/fitness/fitness_id; https://whispering-peak-20829.herokuapp.com/feedback/feedback_id
+- allows you to delete data
 
-### `npm run build`
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+## Technologies Used
+- ReactJS
+- Express 
+- NodeJS
+- Postgres
+- SQL
+- HTML
+- CSS
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
