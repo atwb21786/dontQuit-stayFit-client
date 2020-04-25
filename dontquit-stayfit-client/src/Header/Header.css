@@ -2,16 +2,18 @@
     box-sizing: border-box;
 }
 
-nav .link{
-    display: block;
+nav {
+    display: inline-block;
     font-size: 35px;
     color: black
 }
 
-nav {
-    top: 0;
-    left: 0;
-    right: 0;
+.home-link {
+    margin-left: 50px;
+}
+
+.logout-link {
+    margin-right: 50px;
 }
 
 .headtitle {

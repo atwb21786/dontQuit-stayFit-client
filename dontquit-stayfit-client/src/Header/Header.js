@@ -13,7 +13,7 @@ class Header extends React.Component {
     renderLogoutLink() {
         return (
             <div>
-                <Link onClick={this.handleLogoutClick} to='/' className='link'>LOGOUT</Link>
+                <Link onClick={this.handleLogoutClick} to='/' className='logout-link'>LOGOUT</Link>
             </div>
         )
     }
@@ -22,7 +22,7 @@ class Header extends React.Component {
         return(
             <div>
                 <nav>
-                    <Link to='/homepage' className='link'>HOME</Link>
+                    <Link to='/homepage' className='home-link'>HOME</Link>
                     {TokenService.hasAuthToken() ? this.renderLogoutLink() : "" }
                 </nav>
                 <header>
