@@ -1,0 +1,14 @@
+
+.goals {
+    margin: 50px;
+}
+
+.goalsLog {
+    color: white;
+}
+
+li {
+    color: white;
+    margin: 5px;
+    list-style-type: none;
+}

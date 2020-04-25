@@ -21,13 +21,13 @@ class Header extends React.Component {
     render() {
         return(
             <div>
+                <header>
+                    <h2 className="headtitle">DON'T QUIT STAY FIT!</h2>
+                </header>
                 <nav>
                     <Link to='/homepage' className='home-link'>HOME</Link>
                     {TokenService.hasAuthToken() ? this.renderLogoutLink() : "" }
                 </nav>
-                <header>
-                    <h2 className="headtitle">DON'T QUIT STAY FIT!</h2>
-                </header>
             </div>
         )
     }

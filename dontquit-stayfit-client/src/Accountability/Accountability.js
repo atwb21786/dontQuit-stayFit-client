@@ -1,4 +1,5 @@
 import React from 'react'
+import './Accountability.css'
 import config from '../config'
 import TokenService from '../Service/token-service'
 
@@ -125,13 +126,13 @@ class Accountability extends React.Component {
                     <h4>REFLECT ON TODAY, PLAN FOR TOMORROW</h4>
                         <form onSubmit={this.addFeedback}>
                             <label htmlFor="accountability"></label>
-                            <textarea name='content' required></textarea>
+                            <textarea className="feedback" name='content' required></textarea>
                             <br/>
                             <button type='submit'>ENTER</button>
                             <button type='submit' onClick={this.handleClickCancel}>CANCEL</button>
                         </form>
                     <br/>
-                    <h4>ACCOUNTABILITY LOG:</h4>
+                    <h4 className="feedbackLog" >ACCOUNTABILITY LOG:</h4>
                     <ul>
                         {this.state.feedback.map((item, index) => (
                                 

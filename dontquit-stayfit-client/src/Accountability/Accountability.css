@@ -1,0 +1,14 @@
+
+.feedback {
+    margin: 50px;
+}
+
+.feedbackLog {
+    color: white;
+}
+
+li {
+    color: white;
+    margin: 5px;
+    list-style-type: none;
+}

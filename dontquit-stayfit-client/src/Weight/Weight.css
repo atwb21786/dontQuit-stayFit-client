@@ -1,0 +1,14 @@
+
+.weight {
+    margin: 50px;
+}
+
+.weightLog {
+    color: white;
+}
+
+li {
+    color: white;
+    margin: 5px;
+    list-style-type: none;
+}

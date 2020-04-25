@@ -1,4 +1,5 @@
 import React from 'react'
+import './Goals.css'
 import config from '../config'
 import TokenService from '../Service/token-service'
 
@@ -127,13 +128,13 @@ class Goals extends React.Component {
                 <main>
                     <form onSubmit={this.handleAddGoal}>
                         <label htmlFor='goals'></label>
-                        <textarea name="content" required></textarea>
+                        <textarea name="content" className="goals" required></textarea>
                         <br/>
                         <button type='submit' >ENTER</button>
                         <button type='submit' onClick={this.handleClickCancel}>CANCEL</button>
                     </form>
                     <br/>
-                    <h4>GOALS:</h4>
+                    <h4 className="goalsLog">GOALS:</h4>
                     <ul>
                         {this.state.goals.map((goal, index) => (
                             

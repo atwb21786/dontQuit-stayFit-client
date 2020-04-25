@@ -1,4 +1,5 @@
 import React from 'react'
+import './Fitness.css'
 import config from '../config'
 import TokenService from '../Service/token-service'
 
@@ -125,13 +126,13 @@ class Fitness extends React.Component {
                     <h4>ENTER WORKOUT</h4>
                         <form onSubmit={this.addWorkoutForm}>
                             <label htmlFor="fitness"></label>
-                            <textarea name='content' required></textarea>
+                            <textarea className="fitness" name='content' required></textarea>
                             <br/>
                             <button type='submit'>ENTER</button>
                             <button type='submit' onClick={this.handleClickCancel}>CANCEL</button>
                         </form>
                     <br/>
-                    <h4>FITNESS LOG:</h4>
+                    <h4 className="fitLog" >FITNESS LOG:</h4>
                     <ul>
                         {this.state.fitness.map((item, index) => (
                                 

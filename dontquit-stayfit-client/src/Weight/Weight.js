@@ -1,4 +1,5 @@
 import React from 'react'
+import './Weight.css'
 import config from '../config'
 import TokenService from '../Service/token-service'
 
@@ -128,14 +129,14 @@ class Weight extends React.Component {
                     <h4>ENTER WEIGHT</h4>
                         <form onSubmit={this.handleAddWeight}>
                             <label htmlFor="content"></label>
-                            <input type="number" step="0.1" id="content" name="content" required/>
+                            <input className="weight" type="number" step="0.1" id="content" name="content" required/>
                             <br/>
                             <button type='submit'>ENTER</button>
                             <button type='submit' onClick={this.handleClickCancel}>CANCEL</button>
 
                         </form>
                     
-                    <h4>WEIGHT LOG:</h4>
+                    <h4 className="weightLog" >WEIGHT LOG:</h4>
                     <ul>
                         {this.state.weight.map((item, index) => (
                                 

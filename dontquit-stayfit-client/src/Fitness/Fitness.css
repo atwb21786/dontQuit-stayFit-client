@@ -1,0 +1,14 @@
+
+.fitness {
+    margin: 50px;
+}
+
+.fitLog {
+    color: white;
+}
+
+li {
+    color: white;
+    margin: 5px;
+    list-style-type: none;
+}

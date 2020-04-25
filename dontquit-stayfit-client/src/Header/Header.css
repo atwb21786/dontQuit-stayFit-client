@@ -2,23 +2,27 @@
     box-sizing: border-box;
 }
 
-nav {
-    display: inline-block;
-    font-size: 35px;
-    color: black
-}
-
-.home-link {
-    margin-left: 50px;
-}
-
-.logout-link {
-    margin-right: 50px;
-}
-
 .headtitle {
     display: block;
     color: black;
     font-size: 30px;
-    margin-bottom: 150px;
+    margin-bottom: 25px;
 }
+
+a {
+    display: inline-block;
+}
+
+.home-link {
+    margin: 25px;
+    font-size: 25px;
+    color: black;
+
+}
+
+.logout-link {
+    margin: 25px;
+    font-size: 25px;
+    color: black;
+}
+

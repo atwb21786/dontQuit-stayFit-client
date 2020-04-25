@@ -1,4 +1,5 @@
 import React from 'react'
+import './Homepage.css'
 import { Link } from 'react-router-dom'
 
 class HomePage extends React.Component {
@@ -7,13 +8,12 @@ class HomePage extends React.Component {
         return(
             <div>
                 <main>
-                    <Link to='/goals'>GOALS</Link>
+                    <Link to='/goals' className="goalsLink">GOALS</Link>
                     <br/>
-                    <Link to='/weight'>WEIGHT</Link>
+                    <Link to='/weight' className="weightLink">WEIGHT</Link>
+                    <Link to='/fitness' className="fitnessLink">FITNESS</Link>
                     <br/>
-                    <Link to='/fitness'>FITNESS</Link>
-                    <br/>
-                    <Link to='/accountability'>
+                    <Link to='/accountability' className="feedbackLink">
                         REVIEW TODAY, PLAN TOMORROW
                     </Link>
                 </main>
