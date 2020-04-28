@@ -1,6 +1,3 @@
-* {
-    box-sizing: border-box;
-}
 
 nav {
     display: flex;
@@ -8,7 +5,7 @@ nav {
 }
 
 .headtitle {
-    display: block;
+    display: inline-block;
     color: black;
     background: none;
     font-size: 30px;
@@ -40,6 +37,13 @@ nav {
     .nav-link {
         font-size: 15px;
         margin-bottom: 50px;
+    }
+}
+
+@media screen and (max-width: 500px) {
+
+    .headtitle {
+        display: block;
     }
 }
 
