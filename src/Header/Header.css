@@ -5,10 +5,9 @@
 nav {
     display: flex;
     justify-content: center;
-    background: none;
 }
 
-h2 {
+.headtitle {
     display: block;
     color: black;
     background: none;
@@ -28,5 +27,19 @@ h2 {
     margin-bottom: 35px;
     padding: .25em;
     text-decoration: none;
+}
+
+@media screen and (max-width: 650px) {
+ 
+
+    .headtitle {
+        margin-left: 10px;
+        margin-right: 10px;
+    }
+
+    .nav-link {
+        font-size: 15px;
+        margin-bottom: 50px;
+    }
 }
 
