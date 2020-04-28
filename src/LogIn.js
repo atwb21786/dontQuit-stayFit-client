@@ -34,6 +34,10 @@ class LogIn extends React.Component {
 
     }
 
+    handleClickCancel = () => {
+        this.props.history.push('/')
+    }
+
     render() {
         const error = this.state.error
         return (
@@ -41,9 +45,8 @@ class LogIn extends React.Component {
                 <header>
                     <h2 className="logintitle">DON'T QUIT STAY FIT!</h2>
                 </header>
-                <main>
+                <form onSubmit={this.handleJWTSubmission}>
                     <h3>Log In</h3>
-                    <form onSubmit={this.handleJWTSubmission}>
                     <fieldset>
                         <label htmlFor="username">USERNAME:</label>
                         <input type="text" id="username" name="user_name" required/>
@@ -53,10 +56,11 @@ class LogIn extends React.Component {
                         <br/>
                         {/* <button type="submit">SUBMIT</button> */}
                         <button type='submit'>SUBMIT</button>
+                        <button type='submit' onClick={this.handleClickCancel}>CANCEL</button>
                     </fieldset>
-                    </form>
-                    <div>{error}</div>
-                </main>
+                </form>
+                <footer className="error">{error}</footer>
+                
             </div>
 
         )

@@ -24,6 +24,10 @@ class Register extends React.Component {
         })
     }
 
+    handleClickCancel = () => {
+        this.props.history.push('/')
+    }
+
     render() {
         const error = this.state.error
         return (
@@ -31,9 +35,9 @@ class Register extends React.Component {
                 <header>
                     <h2 className="regtitle">DON'T QUIT STAY FIT!</h2>
                 </header>
-                <main>
-                    <form onSubmit={this.getUserCredentials}>
-                        <h3>REGISTRATION</h3>
+                
+                <form onSubmit={this.getUserCredentials}>
+                    <h3>REGISTRATION</h3>
                     <fieldset>
                         <label htmlFor="username">USERNAME:</label>
                         <input type="text" id="username" name="user_name" sizerequired/>
@@ -43,10 +47,11 @@ class Register extends React.Component {
                         <br/>
                         {/* <button type="submit">SUBMIT</button> */}
                         <button>SUBMIT</button>
+                        <button type="submit" onClick={this.handleClickCancel}>CANCEL</button>
                     </fieldset>
-                    </form>
-                    <div>{error}</div>
-                </main>
+                </form>
+                <div>{error}</div>
+                
             </div>
 
         )

@@ -1,17 +1,21 @@
-body{
+body {
     margin: 0 auto;
     text-align: center;
 }
 
 .logintitle {
     color: black;
-    font-size: 40px;
-    margin-bottom: 150px;
+    margin-bottom: 125px;
 }
 
 h3 {
     font-size: 15px;
     margin-bottom: 50px;
+    color: white;
+}
+
+label {
+    color: white;
 }
 
 input {
@@ -20,4 +24,8 @@ input {
 
 fieldset {
     border: none;
+}
+
+.error {
+    color: red;
 }

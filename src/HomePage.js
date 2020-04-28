@@ -14,7 +14,7 @@ class HomePage extends React.Component {
                     <Link to='/fitness' className="fitnessLink">FITNESS</Link>
                     <br/>
                     <Link to='/accountability' className="feedbackLink">
-                        REVIEW TODAY, PLAN TOMORROW
+                        REVIEW TODAY PLAN TOMORROW
                     </Link>
                 </main>
             </div>
