@@ -5,6 +5,7 @@ body {
 
 .logintitle {
     color: black;
+    background: rgba(255, 255, 255, 0.5);
     margin-bottom: 125px;
 }
 
