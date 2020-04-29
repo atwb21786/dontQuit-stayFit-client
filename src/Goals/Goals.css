@@ -8,7 +8,13 @@
 }
 
 li {
+    display: table;
     color: white;
-    margin: 5px;
     list-style-type: none;
+    text-align: left;
+}
+
+button {
+    display: table-cell;
+    margin: 2px;
 }

@@ -60,7 +60,6 @@ class Goals extends React.Component {
 
     deleteGoal = (e, index) => {
         e.preventDefault()
-        console.log(index)
         fetch(`${config.API_ENDPOINT}/goals/${index}`, {
             method: 'DELETE', 
             headers: {
@@ -126,9 +125,10 @@ class Goals extends React.Component {
         return(
             <div>
                 <main>
+                    <h2>WHAT ARE YOUR GOALS?</h2>
                     <form onSubmit={this.handleAddGoal}>
                         <label htmlFor='goals'></label>
-                        <textarea name="content" className="goals" required></textarea>
+                        <textarea name="content" className="goals" rows="8" cols="25" required></textarea>
                         <br/>
                         <button type='submit' >ENTER</button>
                         <button type='submit' onClick={this.handleClickCancel}>CANCEL</button>
@@ -149,9 +149,11 @@ class Goals extends React.Component {
                                 <button type='submit'>ENTER</button>
                                 <button type='submit' onClick={this.cancelAddedGoal}>CANCEL</button>
                             </form>) : "" }
-                            
+                                
+                                {new Date(goal.date_created).toLocaleDateString("en-US") + " "}
+                                {new Date(goal.date_created).toLocaleTimeString("en-US") + ": "}
                                 {goal.content}
-                                {goal.date_created}
+                                
 
                             </li>
                         ))}

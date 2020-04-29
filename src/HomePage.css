@@ -4,7 +4,7 @@
 
 .goalsLink {
     display: inline-block;
-    margin-top: 100px;
+    margin-top: 50px;
     margin-bottom: 75px;
     color: black;
     text-align: center;
@@ -51,6 +51,7 @@
     border-radius: 15%;
     height: 70px;
     width: 250px;
+    margin-bottom: 50px;
     padding: .2em;
     text-decoration: none;
 }
