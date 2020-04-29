@@ -123,10 +123,10 @@ class Accountability extends React.Component {
         return(
             <div>
                 <main>
-                    <h4>REFLECT ON TODAY, PLAN FOR TOMORROW</h4>
+                    <h2>REFLECT ON TODAY, PLAN FOR TOMORROW</h2>
                         <form onSubmit={this.addFeedback}>
                             <label htmlFor="accountability"></label>
-                            <textarea className="feedback" name='content' required></textarea>
+                            <textarea className="feedback" name='content' rows="8" cols="25" required></textarea>
                             <br/>
                             <button type='submit'>ENTER</button>
                             <button type='submit' onClick={this.handleClickCancel}>CANCEL</button>
@@ -148,8 +148,10 @@ class Accountability extends React.Component {
                                     <button type='submit' onClick={this.cancelAddedFeedback}>CANCEL</button>
                                 </form>) : "" }
 
+                                    {new Date(item.date_created).toLocaleTimeString("en-US") + " "}
+                                    {new Date(item.date_created).toLocaleTimeString("en-US") + ": "}
                                     {item.content}
-                                    {item.date_created}
+                                    
                                 </li>
                             ))}
                     </ul>

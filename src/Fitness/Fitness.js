@@ -123,10 +123,10 @@ class Fitness extends React.Component {
         return(
             <div>
                 <main>
-                    <h4>ENTER WORKOUT</h4>
+                    <h2>ENTER WORKOUT</h2>
                         <form onSubmit={this.addWorkoutForm}>
                             <label htmlFor="fitness"></label>
-                            <textarea className="fitness" name='content' required></textarea>
+                            <textarea className="fitness" name='content' rows="8" cols="25" required></textarea>
                             <br/>
                             <button type='submit'>ENTER</button>
                             <button type='submit' onClick={this.handleClickCancel}>CANCEL</button>
@@ -142,14 +142,16 @@ class Fitness extends React.Component {
                                 {this.state.editFitness === item.id ? 
                                 (<form onSubmit={this.updateData}>
                                     <label htmlFor="fitness"></label>
-                                    <textarea name='content' required></textarea>
+                                    <textarea name="content" required></textarea>
                                     <br/>
                                     <button type='submit'>ENTER</button>
                                     <button type='submit' onClick={this.cancelAddedWorkout}>CANCEL</button>
                                 </form>) : "" }
-
+                                    
+                                    {new Date(item.date_created).toLocaleDateString("en-US") + " "}
+                                    {new Date(item.date_created).toLocaleTimeString("en-US") + ": "}
                                     {item.content}
-                                    {item.date_created}
+                                    
                                 </li>
                             ))}
                     </ul>

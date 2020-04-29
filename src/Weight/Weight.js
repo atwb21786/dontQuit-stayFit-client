@@ -126,14 +126,13 @@ class Weight extends React.Component {
         return(
             <div>
                 <main>
-                    <h4>ENTER WEIGHT</h4>
+                    <h2>ENTER WEIGHT</h2>
                         <form onSubmit={this.handleAddWeight}>
                             <label htmlFor="content"></label>
                             <input className="weight" type="number" step="0.1" id="content" name="content" required/>
                             <br/>
                             <button type='submit'>ENTER</button>
                             <button type='submit' onClick={this.handleClickCancel}>CANCEL</button>
-
                         </form>
                     
                     <h4 className="weightLog" >WEIGHT LOG:</h4>
@@ -152,8 +151,10 @@ class Weight extends React.Component {
                                     <button type='submit' onClick={this.cancelAddedWeight}>CANCEL</button>
                                 </form>) : "" }
 
-                                    {item.measurement}
-                                    {item.date_created}
+                                    {new Date(item.date_created).toLocaleDateString("en-US") + " "}
+                                    {new Date(item.date_created).toLocaleTimeString("en-US") + ": "}
+                                    {item.measurement + " lbs"}
+                                    
 
                                 </li>
                             ))}
