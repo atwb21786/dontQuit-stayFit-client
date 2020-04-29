@@ -8,8 +8,10 @@ nav {
     display: inline-block;
     color: black;
     background: none;
+    background-color: rgba(255, 255, 255, 0.5);
+    background-size: auto;
     font-size: 30px;
-    margin-bottom: 25px;
+    margin-bottom: 75px;
     margin-right: 50px;
     margin-left: 50px;
 }
@@ -21,7 +23,7 @@ nav {
     background-color: white;
     border-radius: 15%;
     margin: 10px;
-    margin-bottom: 35px;
+    margin-bottom: 125px;
     padding: .25em;
     text-decoration: none;
 }
@@ -36,14 +38,10 @@ nav {
 
     .nav-link {
         font-size: 15px;
-        margin-bottom: 50px;
+        margin: 10px;
+        padding: 10px;
+        margin-bottom: 200px;
     }
 }
 
-@media screen and (max-width: 500px) {
-
-    .headtitle {
-        display: block;
-    }
-}
 

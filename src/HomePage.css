@@ -2,12 +2,9 @@
     box-sizing: border-box;
 }
 
-main {
-    margin: 100px;
-}
-
 .goalsLink {
     display: inline-block;
+    margin-top: 100px;
     margin-bottom: 75px;
     color: black;
     text-align: center;
