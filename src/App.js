@@ -2,7 +2,7 @@ import React from 'react';
 import './App.css';
 import LandingPage from './LandingPage';
 import Header from './Header/Header'
-import LogIn from './LogIn';
+import Login from './Login';
 import HomePage from './HomePage';
 import Goals from './Goals/Goals'
 import Weight from './Weight/Weight';
@@ -11,6 +11,7 @@ import Accountability from './Accountability/Accountability';
 import Register from './Register'
 import PublicRoute from './Utils/PublicRoute'
 import PrivateRoute from './Utils/PrivateRoute'
+import { Route } from 'react-router-dom'
 // import config from './config'
 
 class App extends React.Component {
@@ -23,9 +24,9 @@ class App extends React.Component {
             component={Header}/>
         </header>
         <main className='App'>
-          <PublicRoute exact path={'/'} component={LandingPage}/>
+          <Route exact path={'/'} component={LandingPage}/>
           <PublicRoute path={'/register'} component={Register}/>
-          <PublicRoute path={'/login'} component={LogIn}/>
+          <PublicRoute path={'/login'} component={Login}/>
           <PrivateRoute path={'/homepage'} component={HomePage}/>
           <PrivateRoute path={'/goals'} component={Goals}/>
           <PrivateRoute path={'/weight'} component={Weight}/>

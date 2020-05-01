@@ -40,7 +40,7 @@ class Register extends React.Component {
                     <h3>REGISTRATION</h3>
                     <fieldset>
                         <label htmlFor="username">USERNAME:</label>
-                        <input type="text" id="username" name="user_name" sizerequired/>
+                        <input type="text" id="username" name="user_name" required/>
                         <br/>
                         <label htmlFor="pwd">PASSWORD:</label>
                         <input type="password" id="pwd" name="password" required/>

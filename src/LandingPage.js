@@ -1,8 +1,11 @@
 import React from 'react'
 import './LandingPage.css'
 import {Link} from 'react-router-dom'
+import TokenService from './Service/token-service'
 
 class LandingPage extends React.Component {
+
+    
     render() {
         return (
             <div>
@@ -18,6 +21,12 @@ class LandingPage extends React.Component {
                     Otherwise, please register and sign in to get started!
                     </p>
                 </section>
+                {TokenService.hasAuthToken() ? (<>
+                <section>
+                    <Link to='/homepage' className='links'>HOME</Link>
+                    
+                </section>
+                </>) : (<>
                 <section>
                     <Link to='/login' className='links'>SIGN IN!</Link>
                     <Link to='/register' className='links'>REGISTER HERE!</Link>
@@ -26,6 +35,8 @@ class LandingPage extends React.Component {
                     <p>Demo username: ABC</p>
                     <p>Demo password: 123</p>
                 </footer>
+                </>)}
+                
                 
             </div>
         )

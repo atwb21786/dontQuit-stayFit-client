@@ -4,7 +4,7 @@ import TokenService from './Service/token-service'
 import ApiAuthService from './Service/api-auth-service'
 
 
-class LogIn extends React.Component {
+class Login extends React.Component {
     
     static defaultProps = {
         loginSuccess: () => {}
@@ -67,4 +67,4 @@ class LogIn extends React.Component {
     }
 }
 
-export default LogIn
+export default Login
